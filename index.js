@@ -3,6 +3,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var multer = require('multer'); // v1.0.5
 var upload = multer(); // for parsing multipart/form-data
+var pg = require('pg');
 
 var app = express();
 
@@ -34,15 +35,18 @@ app.post('/slack', function(request, response) {
         return;
     }
 
-    console.log('Text: ' + playload.text);
-    console.log('user_name: ' + playload.user_name);
-    console.log('channel_name: ' + playload.channel_name);
-    // console.log('channel_id: ' + playload.channel_id);
-    // console.log('user_id: ' + playload.user_id);
-    // console.log('team_id: ' + playload.team_id);
-    // console.log('token: ' + playload.token);
+    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+        client.query('insert slack_log(channel_name, channel_id, user_id, user_name, text) values($1, $2, $3, $4)', 
+            [playload.channel_name, playload.channel_id, playload.user_id, playload.user_name, playload.text],
+            function(err, result) {
+              done();
+              if (err)
+               { console.error(err); response.send("Error " + err); }
+        });
+    });
+
     response.sendStatus(200);
-    response.end();
+    response.end('done');
 });
 
 
