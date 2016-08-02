@@ -17,7 +17,8 @@ app.get('/', function(request, response) {
 
 app.post('/slack', function(request, response) {
     console.log(request.body);
-    response.json({"text": "received"})
+    response.json({"text": "received"});
+    response.end();
 });
 
 
