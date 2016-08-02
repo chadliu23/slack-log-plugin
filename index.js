@@ -36,7 +36,7 @@ app.post('/slack', function(request, response) {
     }
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-        client.query('insert into slack_log(channel_name, channel_id, user_id, user_name, text) values($1, $2, $3, $4)', 
+        client.query('insert into slack_log(channel_name, channel_id, user_id, user_name, text) values($1, $2, $3, $4, $5)', 
             [playload.channel_name, playload.channel_id, playload.user_id, playload.user_name, playload.text],
             function(err, result) {
               done();
