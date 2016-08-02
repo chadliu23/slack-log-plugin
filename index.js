@@ -9,11 +9,6 @@ var app = express();
 
 var config = {
     token: process.env.TOKEN ||'', // get from https://api.slack.com/web#basics
-    income_url: process.env.INCOME_URL || '',
-    outcome_token: process.env.OUTCOME_TOKEN || '',
-    // optionals
-    floodProtection: true,
-    silent: false // keep the bot quiet
 };
 
 app.use(bodyParser.json()); // for parsing application/json
