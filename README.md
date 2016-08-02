@@ -12,3 +12,7 @@ Table Schema:
 Create table slack_log(user_name text, user_id  text, channel_id text, channel_name text, text  text,  timestamp timestamp default now());
 ```
 
+# LICENSE
+
+MIT License
+
