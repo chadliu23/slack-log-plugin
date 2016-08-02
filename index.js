@@ -30,7 +30,7 @@ app.post('/slack', function(request, response) {
     let playload = request.body;
 
     if (config.token !== '' && config.token !== playload.token) {
-        response.sendStatus(404);
+        response.sendStatus(401);
         response.end();
         return;
     }
