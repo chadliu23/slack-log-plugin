@@ -1,3 +1,4 @@
+"use strict";
 var express = require('express');
 var bodyParser = require('body-parser');
 var multer = require('multer'); // v1.0.5
